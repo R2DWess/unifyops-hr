@@ -1,4 +1,4 @@
-package com.corp.unifyops.hr.pessoa;
+package com.corp.unifyops.hr.pessoa.repository;
 
 import com.corp.unifyops.hr.pessoa.model.DadosFuncionario;
 import org.springframework.data.jpa.repository.JpaRepository;

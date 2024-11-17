@@ -1,6 +1,6 @@
 package com.corp.unifyops.hr.pessoa.identifier;
 
-import com.corp.unifyops.hr.pessoa.FuncionarioRepository;
+import com.corp.unifyops.hr.pessoa.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
