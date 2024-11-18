@@ -7,8 +7,6 @@ import jakarta.persistence.*;
 public class DadosFuncionario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private String idFuncional;
     private String name;
     private String idade;
