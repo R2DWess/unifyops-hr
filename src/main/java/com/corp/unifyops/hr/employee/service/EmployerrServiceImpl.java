@@ -45,11 +45,11 @@ public class EmployerrServiceImpl implements EmployerrService {
 
     private static EmployeeData getEmployeeData(EmployeeData employeeData, Optional<EmployeeData> existingEmployee) {
         EmployeeData employee = existingEmployee.get();
-        if (employeeData.getName() != null) {
-            employee.setName(employeeData.getName());
+        if (employeeData.getEmployeeName() != null) {
+            employee.setEmployeeName(employeeData.getEmployeeName());
         }
-        if (employeeData.getAge() != null) {
-            employee.setAge(employeeData.getAge());
+        if (employeeData.getEmployeeAge() != null) {
+            employee.setEmployeeAge(employeeData.getEmployeeAge());
         }
         if (employeeData.getEmployeeAddress() != null) {
             employee.setEmployeeAddress(employeeData.getEmployeeAddress());
