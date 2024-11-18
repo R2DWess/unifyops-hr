@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'info.solidsoft.pitest' version '1.7.0'
 }
 
 group = 'com.corp.unifyops'
@@ -32,8 +33,22 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testImplementation 'org.pitest:pitest-junit5-plugin:0.15'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+pitest {
+    junit5PluginVersion = '0.15'
+    threads = 4
+    outputFormats = ['HTML']
+    timestampedReports = false
+    mutationThreshold = 80
+    coverageThreshold = 80
+    mutators = ['DEFAULTS']
+    targetClasses = ['com.corp.unifyops.*']
+    targetTests = ['com.corp.unifyops.*']
 }
