@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeData, Integer> {
 
-    boolean existsByEmployeeId(String id);
+    boolean existsByEmployeeId(String employeeId);
 
     void deleteByEmployeeId(String employeeId);
 

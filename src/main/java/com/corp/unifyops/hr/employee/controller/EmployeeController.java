@@ -3,6 +3,7 @@ package com.corp.unifyops.hr.employee.controller;
 import com.corp.unifyops.hr.employee.identifier.EmployeeIdGenerator;
 import com.corp.unifyops.hr.employee.model.EmployeeData;
 import com.corp.unifyops.hr.employee.service.EmployerrService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public EmployeeData criarPessoa(@RequestBody EmployeeData employeeData) {
+    public EmployeeData criarPessoa(@Valid @RequestBody EmployeeData employeeData) {
         employeeData.setEmployeeId(employeeIdGenerator.uniqueIdGenerator());
         return employerrService.register(employeeData);
     }

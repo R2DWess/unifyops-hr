@@ -50,7 +50,6 @@ public class EmployeeData {
         this.employeeAge = employeeAge;
     }
 
-
     public String getEmployeePhone() {
         return employeePhone;
     }
