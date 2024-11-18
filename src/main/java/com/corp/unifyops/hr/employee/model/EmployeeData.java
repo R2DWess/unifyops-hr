@@ -1,5 +1,8 @@
 package com.corp.unifyops.hr.employee.model;
 
+import com.corp.unifyops.hr.employee.model.serializer.EmployeePhoneSerializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,6 +22,7 @@ public class EmployeeData {
     private String employeeEmail;
 
     @Pattern(regexp = "^\\d{11}$", message = "The phone number must have exactly 11 digits.")
+    @JsonSerialize(using = EmployeePhoneSerializer.class)
     private String employeePhone;
 
     @NotBlank(message = "The age fild is required")

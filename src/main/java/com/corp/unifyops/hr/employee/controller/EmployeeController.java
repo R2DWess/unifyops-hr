@@ -21,18 +21,18 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public EmployeeData criarPessoa(@Valid @RequestBody EmployeeData employeeData) {
+    public EmployeeData employeeRegister(@Valid @RequestBody EmployeeData employeeData) {
         employeeData.setEmployeeId(employeeIdGenerator.uniqueIdGenerator());
         return employerrService.register(employeeData);
     }
 
-    @PatchMapping("/{idFuncional}")
-    public EmployeeData atualizarParcial(@PathVariable String idFuncional, @RequestBody EmployeeData employeeData) {
-        return employerrService.update(idFuncional, employeeData);
+    @PatchMapping("/{employeeId}")
+    public EmployeeData employeeUpdate(@PathVariable String employeeId, @RequestBody EmployeeData employeeData) {
+        return employerrService.update(employeeId, employeeData);
     }
 
-    @DeleteMapping("/{idFuncional}")
-    public void deletar(@PathVariable String idFuncional){
+    @DeleteMapping("/{employeeId}")
+    public void delete(@PathVariable String idFuncional){
         employerrService.delete(idFuncional);
     }
 }
