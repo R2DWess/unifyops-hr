@@ -1,4 +1,4 @@
-package com.corp.unifyops.hr.employee.identifier;
+package com.corp.unifyops.hr.utils;
 
 import com.corp.unifyops.hr.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

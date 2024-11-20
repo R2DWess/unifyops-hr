@@ -1,8 +1,9 @@
 package com.corp.unifyops.hr.employee.service;
 
+import com.corp.unifyops.hr.dto.EmployeeDTO;
 import com.corp.unifyops.hr.employee.model.EmployeeData;
 import com.corp.unifyops.hr.employee.repository.EmployeeRepository;
-import com.corp.unifyops.hr.employee.identifier.EmployeeIdGenerator;
+import com.corp.unifyops.hr.mapper.EmployeeMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,16 +13,18 @@ import java.util.Optional;
 @Service
 public class EmployerrServiceImpl implements EmployerrService {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeeIdGenerator employeeIdGenerator;
+    public EmployerrServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     @Override
-    public EmployeeData register(EmployeeData employeeData) {
-        employeeData.setEmployeeId(employeeIdGenerator.uniqueIdGenerator());
-        return employeeRepository.save(employeeData);
+    public EmployeeDTO register(EmployeeDTO employeeDTO) {
+        EmployeeData employeeData = EmployeeMapper.INSTANCE.toEntity(employeeDTO);
+        EmployeeData savedEmployee = employeeRepository.save(employeeData);
+        return EmployeeMapper.INSTANCE.toDTO(savedEmployee);
     }
 
     @Transactional
@@ -31,30 +34,16 @@ public class EmployerrServiceImpl implements EmployerrService {
     }
 
     @Override
-    public EmployeeData update(String employeeId, EmployeeData employeeData) {
-
-        Optional<EmployeeData> existingEmployee = employeeRepository.findByEmployeeId(employeeId);
-        if (existingEmployee.isPresent()){
-            EmployeeData employee = getEmployeeData(employeeData, existingEmployee);
-            return employeeRepository.save(employee);
-
+    public EmployeeDTO update(String employeeId, EmployeeDTO employeeDTO) {
+        Optional<EmployeeData>
+                existingEmployee = employeeRepository.findByEmployeeId(employeeId);
+        if (existingEmployee.isPresent()) {
+            EmployeeData employeeData = existingEmployee.get();
+            EmployeeMapper.INSTANCE.updateEntityFromDTO(employeeDTO, employeeData);
+            EmployeeData updatedEmployee = employeeRepository.save(employeeData);
+            return EmployeeMapper.INSTANCE.toDTO(updatedEmployee);
         } else {
-            throw new RuntimeException("Employee not found with idFuncional: " + employeeId);
+            throw new RuntimeException("Employee not found with ID: " + employeeId);
         }
-    }
-
-    private static EmployeeData getEmployeeData(EmployeeData employeeData, Optional<EmployeeData> existingEmployee) {
-        EmployeeData employee = existingEmployee.get();
-        if (employeeData.getEmployeeName() != null) {
-            employee.setEmployeeName(employeeData.getEmployeeName());
-        }
-        if (employeeData.getEmployeeAge() != null) {
-            employee.setEmployeeAge(employeeData.getEmployeeAge());
-        }
-        if (employeeData.getEmployeeAddress() != null) {
-            employee.setEmployeeAddress(employeeData.getEmployeeAddress());
-        }
-        return employee;
     }
 }
-

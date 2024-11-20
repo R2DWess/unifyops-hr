@@ -1,38 +1,34 @@
 package com.corp.unifyops.hr.employee.controller;
 
-import com.corp.unifyops.hr.employee.identifier.EmployeeIdGenerator;
-import com.corp.unifyops.hr.employee.model.EmployeeData;
+import com.corp.unifyops.hr.dto.EmployeeDTO;
 import com.corp.unifyops.hr.employee.service.EmployerrService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployerrService employerrService;
-    private final EmployeeIdGenerator employeeIdGenerator;
 
     @Autowired
-    public EmployeeController(EmployerrService employerrService, EmployeeIdGenerator employeeIdGenerator) {
+    public EmployeeController(EmployerrService employerrService) {
         this.employerrService = employerrService;
-        this.employeeIdGenerator = employeeIdGenerator;
     }
 
     @PostMapping
-    public EmployeeData employeeRegister(@Valid @RequestBody EmployeeData employeeData) {
-        employeeData.setEmployeeId(employeeIdGenerator.uniqueIdGenerator());
-        return employerrService.register(employeeData);
+    public EmployeeDTO register(@Valid @RequestBody EmployeeDTO employeeDTO) {
+        return employerrService.register(employeeDTO);
     }
 
     @PatchMapping("/{employeeId}")
-    public EmployeeData employeeUpdate(@PathVariable String employeeId, @RequestBody EmployeeData employeeData) {
-        return employerrService.update(employeeId, employeeData);
+    public EmployeeDTO update(@PathVariable String employeeId, @RequestBody EmployeeDTO employeeDTO) {
+        return employerrService.update(employeeId, employeeDTO);
     }
 
     @DeleteMapping("/{employeeId}")
-    public void delete(@PathVariable String idFuncional){
-        employerrService.delete(idFuncional);
+    public void delete(@PathVariable String employeeId) {
+        employerrService.delete(employeeId);
     }
 }

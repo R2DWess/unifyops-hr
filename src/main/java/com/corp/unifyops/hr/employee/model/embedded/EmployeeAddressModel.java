@@ -1,4 +1,4 @@
-package com.corp.unifyops.hr.employee.model;
+package com.corp.unifyops.hr.employee.model.embedded;
 
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;

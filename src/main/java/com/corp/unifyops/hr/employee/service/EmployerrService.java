@@ -1,17 +1,14 @@
 package com.corp.unifyops.hr.employee.service;
-
-
+import com.corp.unifyops.hr.dto.EmployeeDTO;
 import com.corp.unifyops.hr.employee.model.EmployeeData;
 import jakarta.transaction.Transactional;
 
 public interface EmployerrService {
-    EmployeeData register(EmployeeData employeeData);
 
+    EmployeeDTO register(EmployeeDTO employeeDTO);
 
     @Transactional
-    void delete(String idFuncional);
+    void delete(String employeeId);
 
-    EmployeeData update(String idFuncional, EmployeeData employeeData);
-
-
+    EmployeeDTO update(String employeeId, EmployeeDTO employeeDTO);
 }

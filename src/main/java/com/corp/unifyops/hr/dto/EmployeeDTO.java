@@ -1,19 +1,14 @@
-package com.corp.unifyops.hr.employee.model;
+package com.corp.unifyops.hr.dto;
 
 import com.corp.unifyops.hr.employee.model.embedded.EmployeeAddressModel;
-import com.corp.unifyops.hr.employee.model.serializer.EmployeePhoneSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-@Entity(name = "employee")
-@Table(name = "employee_data")
-public class EmployeeData {
+public class EmployeeDTO {
 
-    @Id
     private String employeeId;
+
     @NotBlank(message = "The name field is required")
     private String employeeName;
 
@@ -22,10 +17,8 @@ public class EmployeeData {
     private String employeeEmail;
 
     @Pattern(regexp = "^\\d{11}$", message = "The phone number must have exactly 11 digits.")
-    @JsonSerialize(using = EmployeePhoneSerializer.class)
     private String employeePhone;
 
-    @NotBlank(message = "The age fild is required")
     private String employeeAge;
 
     private EmployeeAddressModel employeeAddress;
@@ -46,12 +39,12 @@ public class EmployeeData {
         this.employeeName = employeeName;
     }
 
-    public String getEmployeeAge() {
-        return employeeAge;
+    public String getEmployeeEmail() {
+        return employeeEmail;
     }
 
-    public void setEmployeeAge(String employeeAge) {
-        this.employeeAge = employeeAge;
+    public void setEmployeeEmail(String employeeEmail) {
+        this.employeeEmail = employeeEmail;
     }
 
     public String getEmployeePhone() {
@@ -62,19 +55,19 @@ public class EmployeeData {
         this.employeePhone = employeePhone;
     }
 
-    public String getEmployeeEmail() {
-        return employeeEmail;
+    public String getEmployeeAge() {
+        return employeeAge;
     }
 
-    public void setEmployeeEmail(String employeeEmail) {
-        this.employeeEmail = employeeEmail;
+    public void setEmployeeAge(String employeeAge) {
+        this.employeeAge = employeeAge;
     }
 
-    public EmployeeAddressModel getEmployeeAddress(){
+    public EmployeeAddressModel getEmployeeAddress() {
         return employeeAddress;
     }
 
-    public void setEmployeeAddress(EmployeeAddressModel employeeAddress){
+    public void setEmployeeAddress(EmployeeAddressModel employeeAddress) {
         this.employeeAddress = employeeAddress;
     }
 }
